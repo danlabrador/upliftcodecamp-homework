@@ -76,10 +76,10 @@ body {
 }
 
 .service__image-container {
+  flex: 0 0 5rem;
   height: 100%;
   margin-right: 1rem;
   padding: 0 .5rem;
-  width: 30rem;
 }
 
 .service__image {
@@ -132,10 +132,11 @@ body {
 }
 
 .member__image-container {
+  flex: 0 0 5rem;
   height: 100%;
   margin-right: 1rem;
   padding: 0 .5rem;
-  width: 25rem;
+  
 }
 
 .member__image {
