@@ -8,4 +8,173 @@
 
 body {
   background-color: #EEE;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+/* Header */
+.header {
+  background-color: #59a9e4;
+  display: flex;
+  height: 3.5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header__logo {
+  display: block;
+  height: 3rem;
+  margin: .25rem 0 0 1rem;
+  padding: .5rem 0;
+}
+
+.header__brand-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: .75rem .1rem;
+  padding: 0.25rem;
+  text-transform: uppercase;
+}
+
+.main {
+  margin-top: 3.5rem;
+}
+
+/* Services Section */
+.services {
+  background-color: white;
+  border-radius: .5rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 775px;
+}
+
+.services__title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.service {
+  background-color: #EEE;
+  border-radius: .5rem;
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 48.75%;
+}
+
+.services > :nth-last-child(-n+2) { /* Select last 2 elements*/
+  margin-bottom: 0;
+}
+
+.service__image-container {
+  height: 100%;
+  margin-right: 1rem;
+  padding: 0 .5rem;
+  width: 30rem;
+}
+
+.service__image {
+  width: 100%;
+}
+
+.service__description {
+  font-size: .70rem;
+}
+
+.service__name {
+  color: #48a4e5;
+  font-size: .85rem;
+  font-weight: bold;
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+}
+
+/* Team Section */
+.team {
+  background-color: white;
+  border-radius: .5rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 1rem auto;
+  padding: 1rem;
+  width: 775px;
+}
+
+.team__title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.member {
+  background-color: #EEE;
+  border-radius: .5rem;
+  display: flex;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 48.75%;
+}
+
+.team > :nth-last-child(-n+2) { /* Select last 2 elements*/
+  margin-bottom: 0;
+}
+
+.member__image-container {
+  height: 100%;
+  margin-right: 1rem;
+  padding: 0 .5rem;
+  width: 25rem;
+}
+
+.member__image {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.member__name {
+  color: #48a4e5;
+  font-size: .85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.member__position {
+  font-size: .60rem;
+  margin-bottom: .5rem;
+}
+
+.member__description {
+  font-size: .70rem;
+}
+
+/* Footer */
+.footer {
+  background-color: #59a9e4;
+  color: #fff;
+  height: 3.5rem;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.footer__text,
+.footer__credits {
+  font-size: .75rem;
+}
+
+.footer__link:link,
+.footer__link:visited {
+  color: #fff;
 }
