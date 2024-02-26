@@ -14,13 +14,13 @@ const hideName = (name) => {
   const words = name.split(' ');
   const numWords = words.length;
   const labeledWords = {
-    first: words.slice(0, numWords - 1).map((word) => word.split('')),
-    last: words[numWords - 1].split(''),
+    firstName: words.slice(0, numWords - 1).join(' '),
+    lastName: words[numWords - 1],
   };
 
   // Hide names
-  const transformedFirstName = hideFirstNameArray(labeledWords.first);
-  const transformedLastName = hideLastName(labeledWords.last);
+  const transformedFirstName = hideFirstName(labeledWords.firstName);
+  const transformedLastName = hideLastName(labeledWords.lastName);
 
   // Return the result
   return `${transformedFirstName} ${transformedLastName}`;
@@ -53,11 +53,16 @@ const isValidInput = (name) => {
 }
 
 
-// Hide the array of first names without modifying the original array and return the result in uppercase
-const hideFirstNameArray = (firstNameArr) => {
-  const firstNameArrCopy = [...firstNameArr];
+/**
+ * Hides the first name by hiding the middle characters without modifying the
+ * original string
+ * @param {string} firstName - The first name to be hidden
+ * @returns {string} - The hidden first name
+ */
+const hideFirstName = (firstName) => {
+  const firstName2DArr = firstName.split(' ').map(word => word.split(''));
 
-  firstNameArrCopy.map(word => {
+  firstName2DArr.map(word => {
     // If the word is 3 characters or less, return the word
     if (word.length <= 3) {
       return word
@@ -76,20 +81,13 @@ const hideFirstNameArray = (firstNameArr) => {
   })
 
   // Join the words and return the result in uppercase
-  return firstNameArr.map(word => word.join('')).join(' ').toUpperCase();
+  return firstName2DArr.map(word => word.join('')).join(' ').toUpperCase();
 }
 
-// Hide the last name without modifying the original array  and return the result in uppercase
-const hideLastName = (lastName) => lastName[0].toUpperCase() + `.`;
-
-// Test
-console.log(hideName("Anonas Mayaman")); // should return AN***S M.
-console.log(hideName("catalina Bongga")); // should return CA*****A B.
-console.log(hideName("Maria Josefina Alvarez")); // should return MA**A JO*****A A.
-console.log(hideName("Dan Labrador")); // should return RI**L M.
-console.log(hideName("Xe Pueblos")); // should return RI**L M.
-console.log(hideName("Jose Protacio Mercado Rizal")); // should return RI**L M.
-console.log(hideName("Rizal")); // should return "Input provided is not a valid name"
-console.log(hideName("aj3j3j3")); // should return "Input provided is not a valid name"
-console.log(hideName("MinD_ContRoL~!")); // should return "Input provided is not a valid name"
-console.log(hideName(143)); // should return "Input provided is not a valid name"
+/**
+ * Abbreviates the last name by returning the first character in uppercase and
+ * adding a period at the end
+ * @param {string} lastName - The last name to be hidden
+ * @returns {string} - Abbreviated last name
+ */
+const hideLastName = (lastName) =>  lastName[0].toUpperCase() + `.`;          
