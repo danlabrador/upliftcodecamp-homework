@@ -1,6 +1,6 @@
 /**
- * @func getGreatestSum() - This function takes a 3x3 array of numbers and returns the greatest sum of either a row or column.
- * @param {arr[3][3]} arr - 3x3 array of numbers
+ * @func getGreatestSum() -This function takes a NxN array of numbers and returns the greatest sum of either a row or column.
+ * @param {num[N][N]} arr - NxN array of numbers
  * @returns {number} - the greatest sum of either a row or column
  */
 
@@ -11,23 +11,43 @@ const getGreatestSum = (arr) => {
   }
 
   // Get sums
-  const rowSums = arr.map(el => el.reduce((acc, curr) => acc + curr, 0));
-  const colSums = arr[0].map(
-    (_, i) => arr.reduce(
-      (acc, curr) => acc + curr[i], 0 // Loop through each column and sum
-    ) 
-  ); 
+  const rowSums = [];
+  const colSums = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    let rowSum = 0;
+    let colSum = 0;
+
+    for (let j = 0; j < arr.length; j++) {
+      rowSum += arr[i][j];
+      colSum += arr[j][i];
+    }
+
+    rowSums.push(rowSum);
+    colSums.push(colSum);
+  }
  
   // Return largest sum
   return Math.max(...rowSums, ...colSums);
 }
 
 // Validate input
-const checkIfIsValid = (arr) =>
-  Array.isArray(arr) &&  // Check if input is an array
-  arr.length === 3 &&    // Check if input has 3 elements
-  arr.every((el) =>      // Check if each element is an array with 3 numbers
-    Array.isArray(el) &&
-    el.length === 3 &&
-    el.every((el) => typeof el === "number")
-  );
+const checkIfIsValid = (arr) => {
+  // Return false if input is not an array
+  if (!Array.isArray(arr)) { 
+    return false;
+  } 
+
+  // Return false if input is not an NxN array
+  if (!arr.every(el => el.length === arr.length)) {
+    return false;
+  }
+
+  // Return false if input is not an array of numbers
+  if (!arr.every(el => el.every(num => typeof num === 'number'))) {
+    return false;
+  }
+
+  // Return true if input is valid
+  return true;
+}
