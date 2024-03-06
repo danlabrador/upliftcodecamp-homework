@@ -10,11 +10,10 @@ const hideName = (name) => {
     return `Input provided is not a valid name`;
   }
   
-  // Validate string
+  // Validate string: The input should have at least 2 words and only contain
+  // letters and spaces
   const words = name.split(' ');
-  if (words.length < 2) { // The input should have at least 2 words
-    return `Input provided is not a valid name`;
-  } else if (name.match(/[^a-zA-Z\s]/)) { // The input should only contain letters and spaces
+  if (words.length < 2 || name.match(/[^a-zA-Z\s]/)) { 
     return `Input provided is not a valid name`;
   }
 
