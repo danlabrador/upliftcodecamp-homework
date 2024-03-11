@@ -1,4 +1,4 @@
-const Queue = require("./Queue");
+const Queue = require('./Queue');
 
 /**
  * Calculates the wait time of the park queue given the current queue, the number
