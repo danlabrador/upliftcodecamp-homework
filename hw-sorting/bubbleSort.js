@@ -6,19 +6,19 @@
  * @returns { string[] } - sorted array of strings
  */
 
+const swapElements = require('./swapElements');
+
 const bubbleSort = (stringArr) => {
   // Implement the bubble sort algorithm
   let size = stringArr.length;
 
   // Iterate through the array
-  for (let iteration = 0; iteration < size-1; iteration++) {
+  for (let iteration = 0; iteration < size - 1; iteration++) {
 
     // Compare adjacent elements and swap if necessary
-    for (let index = 0; index < size-iteration-1; index++) {
-      if (stringArr[index] > stringArr[index+1]) {
-        let temp = stringArr[index];
-        stringArr[index] = stringArr[index+1];
-        stringArr[index+1] = temp;
+    for (let index = 0; index < size - iteration - 1; index++) {
+      if (stringArr[index] > stringArr[index + 1]) {
+        swapElements(stringArr, index, index + 1);
       }
     }
   }
