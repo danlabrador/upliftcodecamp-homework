@@ -4,6 +4,10 @@
  * This function mutates the original array.
  * @param { string[] } stringArr - array of strings
  * @returns { string[] } - sorted array of strings
+ * 
+ * Time Complexity:  O(n log n) - average case
+ *                   O(n^2) - worst case
+ * Space Complexity: O(n)
  */
 
 // Implement the quick sort algorithm

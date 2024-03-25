@@ -4,6 +4,9 @@
  * This function mutates the original array.
  * @param { string[] } stringArr - array of strings
  * @returns { string[] } - sorted array of strings
+ * 
+ * Time Complexity: O(n^2)
+ * Space Complexity: O(1)
  */
 
 const swapElements = require('./swapElements');

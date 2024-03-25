@@ -4,6 +4,9 @@
  * This function mutates the original array.
  * @param { string[] } stringArr - array of strings
  * @returns { string[] } - sorted array of strings
+ * 
+ * Time Complexity: O(n log n)
+ * Space Complexity: O(n)
  */
 
 // Merge two sorted arrays into one sorted array
