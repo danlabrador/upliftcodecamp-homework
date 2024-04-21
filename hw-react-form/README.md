@@ -77,4 +77,4 @@ Contributions to the project are welcome! Please ensure to follow the project's 
 
 ## License
 
-This project is open-sourced under the MIT License. See the LICENSE file for more details.
+This project is open-sourced under the MIT License. See the [LICENSE](LICENSE) file for more details.
