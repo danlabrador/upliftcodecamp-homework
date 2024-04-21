@@ -4,8 +4,8 @@ import { useContext } from 'react';
 
 // Components
 import ProtectedLayout from './layout/ProtectedLayout'
-import EditProfile from './layout/pages/EditProfile';
-import Profile from './layout/pages/Profile';
+import EditProfile from './pages/EditProfile';
+import Profile from './pages/Profile';
 
 // Models
 import { EditProfileFields } from './models/EditProfileFields';

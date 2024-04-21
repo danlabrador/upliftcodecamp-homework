@@ -76,6 +76,10 @@ export function InputTextGroup({ label, id, type, isRequired, value, setValue }:
       setStatusMessage('Role must be at least 3 characters long.');
       setSpanStatusClass('text-white bg-red-600');
       setHasError(true);
+
+      const newErrorStatuses = { ...errorStatuses };
+      newErrorStatuses[id] = true;
+      setErrorStatuses(newErrorStatuses);
     } else if (id==='role' && value.length >= 3) {
       setHasError(false);
       

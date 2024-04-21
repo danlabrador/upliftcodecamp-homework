@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
-import ProfileContext from "../../context/ProfileContext";
-import { ProfileFields } from "../../models/ProfileFields";
-import { Container } from "../../components/Container";
-import { Header2 } from "../../components/Header2";
+import ProfileContext from "../context/ProfileContext";
+import { ProfileFields } from "../models/ProfileFields";
+import { Container } from "../components/Container";
+import { Header2 } from "../components/Header2";
 import { Link, useNavigate } from "react-router-dom";
-import EditProfileContext from "../../context/EditProfileContext";
-import { EditProfileFields } from "../../models/EditProfileFields";
+import EditProfileContext from "../context/EditProfileContext";
+import { EditProfileFields } from "../models/EditProfileFields";
 
 function Profile():JSX.Element {
   const { name, email, role, emergencyContact, emergencyNumber } = useContext(ProfileContext) as ProfileFields;

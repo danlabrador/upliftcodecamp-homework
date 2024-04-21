@@ -1,14 +1,14 @@
-import { Container } from "../../components/Container";
-import { Header2 } from "../../components/Header2";
-import { Header3 } from "../../components/Header3";
-import { InputTextGroup } from "../../components/InputTextGroup";
-import { FieldSet } from "../../components/FieldSet";
-import { Button } from "../../components/Button";
-import EditProfileContext from "../../context/EditProfileContext";
+import { Container } from "../components/Container";
+import { Header2 } from "../components/Header2";
+import { Header3 } from "../components/Header3";
+import { InputTextGroup } from "../components/InputTextGroup";
+import { FieldSet } from "../components/FieldSet";
+import { Button } from "../components/Button";
+import EditProfileContext from "../context/EditProfileContext";
 import { useContext, useEffect, useState } from "react";
-import { EditProfileFields } from "../../models/EditProfileFields";
-import { ProfileFields } from "../../models/ProfileFields";
-import ProfileContext from "../../context/ProfileContext";
+import { EditProfileFields } from "../models/EditProfileFields";
+import { ProfileFields } from "../models/ProfileFields";
+import ProfileContext from "../context/ProfileContext";
 import { useNavigate } from "react-router-dom";
 
 function EditProfile():JSX.Element {
@@ -36,8 +36,6 @@ function EditProfile():JSX.Element {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log('Submitting...')
 
     setName(editProfileName);
     setEmail(editProfileEmail);
