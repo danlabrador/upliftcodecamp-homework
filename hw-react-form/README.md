@@ -37,8 +37,6 @@ To get started with the project, follow these steps:
    Navigate to the project directory and install the required dependencies:
 
    ```sh
-   git checkout -b hw-react-form
-   git pull origin hw-react-form
    cd hw-react-form
    npm install
    ```
