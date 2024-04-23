@@ -13,6 +13,9 @@ export default {
         'hidden': 'hidden',
         'visible': 'visible'
       },
+      colors: {
+        warn: '#ef5350',
+      }
     },
   },
   plugins: [],

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import warnIcon from "../assets/warn.png";
-import EditProfileContext from "../context/EditProfileContext";
+import EditProfileContext from "../contexts/EditProfileContext";
 import { EditProfileFields } from "../models/EditProfileFields";
 
 interface InputTextGroupProps {
@@ -13,13 +13,18 @@ interface InputTextGroupProps {
 }
 
 export function InputTextGroup({ label, id, type, isRequired, value, setValue }: InputTextGroupProps): JSX.Element {
-  const [ hasError, setHasError ] = useState<boolean>(false);
-  const [ statusMessage, setStatusMessage ] = useState<string>('');
-  const [ spanStatusClass, setSpanStatusClass ] = useState('hidden');
-  const [ blurred, setBlurred ] = useState(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [statusMessage, setStatusMessage] = useState<string>('');
+  const [spanStatusClass, setSpanStatusClass] = useState('hidden');
+  const [blurred, setBlurred] = useState(false);
   const { errorStatuses, setErrorStatuses } = useContext(EditProfileContext) as EditProfileFields;
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // If user inputs a nonnumeric character except + for the first character, do not update the value.
+    if (type === 'phone' && e.target.value.length > 0 && (!e.target.value.match(/^\+?\d{0,}$/))) {
+      return;
+    }
+
     const newValue = e.target.value;
     setValue(newValue);
   }
@@ -33,22 +38,22 @@ export function InputTextGroup({ label, id, type, isRequired, value, setValue }:
 
     if (value === '') {
       setStatusMessage('This field is required.');
-      setSpanStatusClass('text-white bg-red-600');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
-    } else if(value !== '') {
+    } else if (value !== '') {
       setStatusMessage('');
       setSpanStatusClass('hidden');
     }
 
-    if (id==='name' && value.trim().split(' ').length < 2) {
+    if (id === 'name' && value.trim().split(' ').length < 2) {
       setStatusMessage('You must input your full name.');
-      setSpanStatusClass('text-white bg-red-600');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
-    } else if (id==='name' && value.trim().split(' ').length >= 2){
+    } else if (id === 'name' && value.trim().split(' ').length >= 2) {
       setHasError(false);
 
       const newErrorStatuses = { ...errorStatuses };
@@ -56,33 +61,33 @@ export function InputTextGroup({ label, id, type, isRequired, value, setValue }:
       setErrorStatuses(newErrorStatuses);
     }
 
-    if (id==='contact-name' && value.trim().split(' ').length < 2) {
+    if (id === 'contact-name' && value.trim().split(' ').length < 2) {
       setStatusMessage('You must input their full name.');
-      setSpanStatusClass('text-white bg-red-600');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
-    } else if (id==='contact-name' && value.trim().split(' ').length >= 2) {
+    } else if (id === 'contact-name' && value.trim().split(' ').length >= 2) {
       setHasError(false);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = false;
       setErrorStatuses(newErrorStatuses);
     }
 
-    if (id==='role' && value.length < 3) {
+    if (id === 'role' && value.length < 3) {
       setStatusMessage('Role must be at least 3 characters long.');
-      setSpanStatusClass('text-white bg-red-600');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
 
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
-    } else if (id==='role' && value.length >= 3) {
+    } else if (id === 'role' && value.length >= 3) {
       setHasError(false);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = false;
       setErrorStatuses(newErrorStatuses);
@@ -90,42 +95,41 @@ export function InputTextGroup({ label, id, type, isRequired, value, setValue }:
 
     if (type === 'email' && !value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       setStatusMessage('Please enter a valid email address.');
-      setSpanStatusClass('text-white bg-red-600');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
     } else if (type === 'email' && value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       setHasError(false);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = false;
       setErrorStatuses(newErrorStatuses);
     }
 
-    if (type === 'phone' && !value.match(/^\+?\d{10,}$/)) {
-      setStatusMessage('Please enter a valid phone number.');
-      setSpanStatusClass('text-white bg-red-600');
+    if (type === 'phone' && !value.match(/^\+?\d{7,}$/)) {
+      setStatusMessage('Input at least 7 digits.');
+      setSpanStatusClass('text-white bg-warn');
       setHasError(true);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
     } else if (type === 'phone' && value.match(/^\+?\d{10,}$/)) {
       setHasError(false);
-      
+
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = false;
       setErrorStatuses(newErrorStatuses);
     }
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, id, type, blurred, hasError])
 
   return (
     <div className="flex flex-col mb-8">
-      {/* Add label */}
       <label htmlFor={id} className="mb-2 text-sm font-bold text-gray-600">{label}</label>
       <input id={id} type={type} className="border p-2 rounded-md" required={isRequired} value={value} onChange={handleChange} onBlur={handleBlur} />
       <p>

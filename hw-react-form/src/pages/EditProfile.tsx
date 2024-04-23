@@ -4,11 +4,11 @@ import { Header3 } from "../components/Header3";
 import { InputTextGroup } from "../components/InputTextGroup";
 import { FieldSet } from "../components/FieldSet";
 import { Button } from "../components/Button";
-import EditProfileContext from "../context/EditProfileContext";
+import EditProfileContext from "../contexts/EditProfileContext";
 import { useContext, useEffect, useState } from "react";
 import { EditProfileFields } from "../models/EditProfileFields";
 import { ProfileFields } from "../models/ProfileFields";
-import ProfileContext from "../context/ProfileContext";
+import ProfileContext from "../contexts/ProfileContext";
 import { useNavigate } from "react-router-dom";
 
 function EditProfile():JSX.Element {
@@ -23,15 +23,15 @@ function EditProfile():JSX.Element {
   const { name, email, role, emergencyContact, emergencyNumber, setName, setEmail, setPosition, setEmergencyContact, setEmergencyNumber } =  useContext(ProfileContext) as ProfileFields;
 
   const [ errorCount, setErrorCount ] = useState<number>(0);
-  const [ isDisabled, setIsBtnDisabled ] = useState<boolean>(true);
+  const [ isBtnDisabled, setIsBtnDisabled ] = useState<boolean>(true);
 
   const handleMouseOver = () => {
     if (Object.values(errorStatuses).some(status => status)) {
       setErrorCount(Object.values(errorStatuses).filter(status => status).length);
       return;
-    } else {
-      setErrorCount(0);
     }
+    
+    setErrorCount(0);
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,9 +58,10 @@ function EditProfile():JSX.Element {
   useEffect(()=>{
     if (errorCount === 0) {
       setIsBtnDisabled(false);
-    } else {
-      setIsBtnDisabled(true);
+      return;
     }
+    
+    setIsBtnDisabled(true);
   }, [errorCount])
   
 
@@ -82,7 +83,7 @@ function EditProfile():JSX.Element {
           <InputTextGroup label={`Contact Person's Number`} id='phone' type='phone' isRequired={true} value={editProfileEmergencyNumber} setValue={setEditProfileEmergencyNumber} />
         </FieldSet>
 
-        <Button isSubmitBtn={true} handleMouseOver={handleMouseOver} isDisabled={isDisabled}>Submit</Button>
+        <Button isSubmitBtn={true} handleMouseOver={handleMouseOver} isBtnDisabled={isBtnDisabled}>Submit</Button>
       </form>
     </Container>
   );

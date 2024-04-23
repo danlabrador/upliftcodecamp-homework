@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useContext } from 'react';
 
 // Components
-import ProtectedLayout from './layout/ProtectedLayout'
+import ProtectedLayout from './layouts/ProtectedLayout'
 import EditProfile from './pages/EditProfile';
 import Profile from './pages/Profile';
 
@@ -11,7 +11,7 @@ import Profile from './pages/Profile';
 import { EditProfileFields } from './models/EditProfileFields';
 
 // Contexts
-import EditProfileContext from './context/EditProfileContext';
+import EditProfileContext from './contexts/EditProfileContext';
 
 function App() {
   const { errorStatuses } = useContext(EditProfileContext) as EditProfileFields;

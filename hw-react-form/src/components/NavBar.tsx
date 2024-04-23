@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import upliftLogo from '../assets/uplift-logo.png';
 import { useContext } from 'react';
-import ProfileContext from '../context/ProfileContext';
+import ProfileContext from '../contexts/ProfileContext';
 
 export function NavBar(): JSX.Element {
   const profile = useContext(ProfileContext);
