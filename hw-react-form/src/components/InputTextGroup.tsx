@@ -117,7 +117,7 @@ export function InputTextGroup({ label, id, type, isRequired, value, setValue }:
       const newErrorStatuses = { ...errorStatuses };
       newErrorStatuses[id] = true;
       setErrorStatuses(newErrorStatuses);
-    } else if (type === 'phone' && value.match(/^\+?\d{10,}$/)) {
+    } else if (type === 'phone' && value.match(/^\+?\d{7,}$/)) {
       setHasError(false);
 
       const newErrorStatuses = { ...errorStatuses };
