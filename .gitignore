@@ -1,0 +1,37 @@
+# React
+/node_modules
+/build
+/.cache
+
+# TypeScript
+/*.js
+/*.js.map
+/*.d.ts
+
+# Tailwind CSS
+/.next
+/out
+/.vercel
+
+# Vite
+/.vite
+
+# Editor/IDE specific files
+/.vscode
+/.idea
+/.vs
+
+# Compiled output
+/dist
+/build
+
+# Dependency lock files
+/yarn.lock
+/package-lock.json
+
+# Environment variables
+/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
