@@ -1,0 +1,3 @@
+[submodule "hw-react-hr-directory"]
+	path = hw-react-hr-directory
+	url = https://github.com/danlabrador/upliftcodecamp-hw-react-hr-directory.git
