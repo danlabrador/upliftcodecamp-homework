@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# HR Directory Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Learning Objectives
 
-Currently, two official plugins are available:
+- Apply routing in React applications to manage navigation.
+- Use localStorage to persist and manage data locally in the browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
 
-## Expanding the ESLint configuration
+This HR directory application is designed to manage employee information effectively. It allows users to view a list of all employees, access detailed information for each employee, and add new employees to the system.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+### Dashboard
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- **View All Employees**: A scrollable list displays all employees. Users can click on an employee's name to view their detailed information.
+
+### Employee Information Page
+
+- **View Employee Details**: Displays detailed information including name, role, and emergency contact details.
+- **Navigation**: A "Back" button allows users to return to the Dashboard.
+
+### Employee Information Form
+
+- **Add New Employee**: From the Dashboard, users can navigate to the Employee Information Form to enter and submit new employee data.
+
+## Technical Specifications
+
+- **Local Storage**: The application uses localStorage to store and retrieve employee data, ensuring information persistence across sessions.
+- **Unit Testing**: The project aims for a unit test coverage of at least 60% to ensure reliability and maintainability of the code.
+
+## Setup
+
+To get the application up and running on your local machine, follow these steps:
+
+```bash
+git clone <repository-url>
+cd hw-react-hr-directory
+npm install
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Navigate to [http://localhost:3000](http://localhost:3000) to view the application in the browser.
+
+## Technologies
+
+- **React** for building the user interface.
+- **Redux Toolkit** for state management.
+- **React Router** for handling in-app navigation.
+- **Vite** for more efficient and faster builds.
+- **Tailwind CSS** for utility-first styling.
+- **Jest** for robust testing frameworks.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
