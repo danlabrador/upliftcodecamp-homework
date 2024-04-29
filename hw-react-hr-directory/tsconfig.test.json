@@ -1,0 +1,16 @@
+// tsconfig.test.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "jest",
+      "node",
+      "cypress"
+    ],
+  },
+  "include": [
+    "src",
+    "jest",
+    "cypress"
+  ]
+}
