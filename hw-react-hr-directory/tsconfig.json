@@ -9,8 +9,7 @@
     ],
     "types": [
       "node",
-      "jest",
-      "cypress"
+      "jest"
     ],
     "module": "ESNext",
     "skipLibCheck": true,
@@ -29,8 +28,7 @@
   },
   "include": [
     "src",
-    "jest",
-    // "cypress"
+    "jest"
   ],
   "references": [
     {
