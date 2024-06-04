@@ -1,34 +1,40 @@
-import { overwriteDataInStorage, parseDataFromStorage } from '../../util/manageDataJson.js';
+import { Types } from "mongoose";
+import Product from "../../models/products.model.js";
 
-const deleteProduct = (req, res) => {
+/** 
+ * Deletes a product from the database.
+ * 
+ * @param {Object} req The request object
+ * @param {Object} res The response object
+ * @returns {Object} The response object
+*/
+const deleteProduct = async (req, res) => {
   try {
-    const { products } = parseDataFromStorage();
     const productId = req.params.id;
-    const hasProduct = products.some(product => product.id === productId);
 
-    if (typeof productId !== 'string') {
-      res.status(400).send({
+    // Check if ID is in valid format
+    if (!Types.ObjectId.isValid(productId)) {
+      return res.status(400).send({
         error: 'Bad Request',
-        message: 'Product ID needs to be in UUID format.'
+        message: 'The provided ID is not valid. ID must be a 24 character hex string, 12 byte Uint8Array, or an integer'
       })
-      return;
     }
 
-    if (!hasProduct) {
-      res.status(404).send({
+    // Check if product exists
+    const product = await Product.findByIdAndDelete(productId);
+    if (!product) {
+      return res.status(404).send({
         error: 'Not Found',
         message: 'Product with the ID provided does not exist.'
       })
-      return;
     }
 
-    const filteredProducts = products.filter(product => product.id !== productId);
-    overwriteDataInStorage(filteredProducts, 'products');
     res.status(204).send()
-  } catch {
-    res.status(500).send({
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
       error: "Internal Server Error",
-      message: "Error retrieving product."
+      message: "Error deleting product."
     });
   }
 };
