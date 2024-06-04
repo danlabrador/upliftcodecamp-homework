@@ -1,5 +1,3 @@
-import { overwriteDataInStorage, parseDataFromStorage } from '../../util/manageDataJson.js';
-import { randomUUID } from 'crypto';
 import Product from '../../models/products.model.js'
 
 /**
@@ -7,7 +5,7 @@ import Product from '../../models/products.model.js'
  * 
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
- * @returns {Object} The response object.
+ * @returns {Object} The object to send.
  */
 const validateBody = (req, res) => {
   // Handle disallowed attributes
