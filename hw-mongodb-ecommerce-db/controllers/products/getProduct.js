@@ -21,7 +21,7 @@ const getProduct = async (req, res) => {
     }
 
     // Check if product exists
-    const requestedProduct = await Product.findOne({ _id: productId })
+    const requestedProduct = await Product.findById(productId);
     if (!requestedProduct) {
       return res.status(404).send({
         error: 'Not Found',
