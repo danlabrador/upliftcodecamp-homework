@@ -1,22 +1,29 @@
-import { parseDataFromStorage } from '../../util/manageDataJson.js';
+import Product from '../../models/products.model.js';
 
-const getProducts = (_, res) => {
+/**
+ * Retrieves the list of products from the database.
+ * @param {Object} res - Response object
+ */
+const getProducts = async (_, res) => {
   try {
-    const data = parseDataFromStorage();
+    const products = await Product.find();
 
-    if (!data.products || data.products.length === 0) {
-      res.status(404).send({
-        error: "Not Found",
-        message: "No products found."
+    // If no products are found, return an empty array. Note: Still considered a successful request.
+    // Indicates that the request was successful, and there are simply no products to display.
+    if (!products || products.length === 0) {
+      res.status(200).send({
+        message: "No products found.",
+        data: []
       });
       return;
     }
 
     return res.status(200).json({
       message: "List of products found.",
-      data: data.products
+      data: products
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).send({
       error: "Internal Server Error",
       message: "Error retrieving products."
