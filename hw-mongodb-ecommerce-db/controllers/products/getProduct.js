@@ -1,19 +1,28 @@
-import { parseDataFromStorage } from '../../util/manageDataJson.js';
+import Product from '../../models/products.model.js';
+import { Types } from 'mongoose';
 
-const getProduct = (req, res) => {
+/**
+ * Retrieves a single product from the database.
+ * 
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @returns {Object} The product retrieved from the database.
+ */
+const getProduct = async (req, res) => {
   try {
-    const data = parseDataFromStorage();
     const productId = req.params.id;
-    const requestedProduct = data.products.find(product => product.id === productId);
 
-    if (typeof productId !== 'string') {
+    // Check if ID is in valid format
+    if (!Types.ObjectId.isValid(productId)) {
       res.status(400).send({
         error: 'Bad Request',
-        message: 'Product ID needs to be in UUID format.'
+        message: 'The provided ID is not valid. ID must be a 24 character hex string, 12 byte Uint8Array, or an integer'
       })
       return;
     }
 
+    // Check if product exists
+    const requestedProduct = await Product.findOne({ _id: productId })
     if (!requestedProduct) {
       res.status(404).send({
         error: 'Not Found',
@@ -22,14 +31,16 @@ const getProduct = (req, res) => {
       return;
     }
 
+    // Return product
     res.status(200).send({
-      message: "Product found.",
+      message: 'Product found.',
       data: requestedProduct
     })
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.status(500).send({
-      error: "Internal Server Error",
-      message: "Error retrieving product."
+      error: 'Internal Server Error',
+      message: 'Error retrieving product.'
     });
   }
 };
