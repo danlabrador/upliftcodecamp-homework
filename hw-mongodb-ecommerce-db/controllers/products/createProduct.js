@@ -7,6 +7,7 @@ import Product from '../../models/products.model.js'
  * 
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
+ * @returns {Object} The response object.
  */
 const validateBody = (req, res) => {
   // Handle disallowed attributes
@@ -22,11 +23,10 @@ const validateBody = (req, res) => {
 
   const disallowedAttributes = Object.keys(otherAttributes);
   if (disallowedAttributes.length > 0) {
-    res.status(400).send({
+    return {
       error: 'Bad Request',
       message: `You have passed disallowed attributes: ${disallowedAttributes.join(', ')}`
-    });
-    return false;
+    };
   }
 
   // Handle missing required attributes
@@ -45,8 +45,7 @@ const validateBody = (req, res) => {
       results.message = `You have missing required attributes: ${missingAttributes.join(', ')}`
     }
 
-    res.status(400).send(results);
-    return false;
+    return results;
   }
 
   // Handle invalid format
@@ -61,14 +60,13 @@ const validateBody = (req, res) => {
   const hasInvalidDataType = isTitleInvalid || isPriceInvalid || isDescriptionInvalid || isCategoryInvalid || isImageInvalid || isRatingInvalid;
 
   if (hasInvalidDataType) {
-    res.status(400).send({
+    return {
       error: 'Bad Request',
       message: 'Incorrect data type passed for one or more attributes.'
-    });
-    return false;
+    };
   }
 
-  return true;
+  return null;
 }
 
 /**
@@ -89,9 +87,9 @@ const createProduct = async (req, res) => {
     } = req.body;
 
     // Validate request body
-    const isBodyValid = validateBody(req, res);
-    if (!isBodyValid) {
-      return;
+    const errorResponse = validateBody(req, res);
+    if (errorResponse) {
+      return res.status(400).send(errorResponse);
     }
 
     // Handle valid body
@@ -101,14 +99,14 @@ const createProduct = async (req, res) => {
 
     await newProduct.save();
 
-    res.status(201).send({
+    return res.status(201).send({
       message: "Product created.",
       data: newProduct
     })
 
   } catch (error) {
     console.log(error)
-    res.status(500).send({
+    return res.status(500).send({
       error: "Internal Server Error",
       message: "Error creating product."
     });
