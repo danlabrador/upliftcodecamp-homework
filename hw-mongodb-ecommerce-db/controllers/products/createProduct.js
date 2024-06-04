@@ -2,7 +2,13 @@ import { overwriteDataInStorage, parseDataFromStorage } from '../../util/manageD
 import { randomUUID } from 'crypto';
 import Product from '../../models/products.model.js'
 
-const validateBody = (req, res, properties) => {
+/**
+ * Validates the request body.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
+const validateBody = (req, res) => {
   // Handle disallowed attributes
   const {
     title = undefined,
@@ -65,6 +71,12 @@ const validateBody = (req, res, properties) => {
   return true;
 }
 
+/**
+ * Creates a new product in the database.
+ * 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
 const createProduct = async (req, res) => {
   try {
     const {
@@ -94,13 +106,13 @@ const createProduct = async (req, res) => {
       data: newProduct
     })
 
-  } catch (e) {
+  } catch (error) {
+    console.log(error)
     res.status(500).send({
       error: "Internal Server Error",
       message: "Error creating product."
     });
 
-    console.log(e)
   }
 };
 
